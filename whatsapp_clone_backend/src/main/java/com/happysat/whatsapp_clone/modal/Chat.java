@@ -17,6 +17,9 @@ public class Chat {
     private String chat_name;
     private String chat_image;
 
+    @ManyToMany
+    private Set<User> admins = new HashSet<>();
+
     @Column(name = "is_group")
     private boolean isGroup;
 
@@ -33,10 +36,11 @@ public class Chat {
     public Chat() {
     }
 
-    public Chat(Integer id, String chat_name, String chat_image, boolean isGroup, User createdBy, Set<User> users, List<Message> messages) {
+    public Chat(Integer id, String chat_name, String chat_image, Set<User> admins, boolean isGroup, User createdBy, Set<User> users, List<Message> messages) {
         this.id = id;
         this.chat_name = chat_name;
         this.chat_image = chat_image;
+        this.admins = admins;
         this.isGroup = isGroup;
         this.createdBy = createdBy;
         this.users = users;
@@ -97,5 +101,13 @@ public class Chat {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public Set<User> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(Set<User> admins) {
+        this.admins = admins;
     }
 }
