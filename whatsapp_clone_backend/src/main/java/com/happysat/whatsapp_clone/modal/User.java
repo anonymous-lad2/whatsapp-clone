@@ -2,6 +2,8 @@ package com.happysat.whatsapp_clone.modal;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 public class User {
 
@@ -56,5 +58,19 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(obj == null)
+            return false;
+        if(getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        return Objects.equals(email, other.email) && Objects.equals(full_name, other.full_name) && Objects.equals(id, other.id)
+                && Objects.equals(password, other.password)
+                && Objects.equals(profile_picture, other.profile_picture);
     }
 }
